@@ -1,5 +1,6 @@
-const SUPABASE_URL = "https://fuuzkooifjhlxvysoynq.supabase.co";
-const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ1dXprb29pZmpobHh2eXNveW5xIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM1NTMwNDksImV4cCI6MjA4OTEyOTA0OX0.trIYTnb8-xSXXJm_5io9Z_i_QSF6FOMlAFv_OyCoo0U";
+const APP_CONFIG = window.__APP_CONFIG || {};
+const SUPABASE_URL = APP_CONFIG.SUPABASE_URL || window.__SUPABASE_URL || "https://YOUR_PROJECT_ID.supabase.co";
+const SUPABASE_ANON_KEY = APP_CONFIG.SUPABASE_ANON_KEY || window.__SUPABASE_ANON_KEY || "YOUR_SUPABASE_ANON_KEY";
 
 let client;
 
@@ -13,7 +14,7 @@ function getSupabaseClient() {
   }
 
   if (SUPABASE_URL.includes("YOUR_PROJECT_ID") || SUPABASE_ANON_KEY.includes("YOUR_SUPABASE_ANON_KEY")) {
-    throw new Error("Set SUPABASE_URL and SUPABASE_ANON_KEY in js/supabaseClient.js.");
+    throw new Error("Set SUPABASE_URL and SUPABASE_ANON_KEY in js/config.js (copy from js/config.example.js).");
   }
 
   client = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);

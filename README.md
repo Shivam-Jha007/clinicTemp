@@ -74,10 +74,23 @@ clinic-website/
 1. Create a Supabase project.
 2. Open the SQL Editor in Supabase.
 3. Run the SQL from supabase-schema.sql.
-4. Open js/supabaseClient.js and update:
+4. Copy js/config.example.js to js/config.js.
+5. Open js/config.js and update:
    - SUPABASE_URL
    - SUPABASE_ANON_KEY
-5. Confirm the appointments table exists in your database.
+6. Confirm the appointments table exists in your database.
+
+## Security Before Deploy
+
+1. Never commit private keys (service role keys, personal tokens, SMTP secrets).
+2. Keep only public client config in frontend code (Supabase anon key is public by design).
+3. If a real key was committed or pushed before, rotate it immediately in Supabase.
+4. This repo includes .gitignore entries for local secret files and .env files.
+5. Use hosting platform environment variables for real secrets in server-side functions only.
+
+Important:
+- In static frontend apps, keys shipped to the browser are visible to users.
+- Do not place service role keys in this project frontend files.
 
 ## Database Schema
 
@@ -129,6 +142,7 @@ Then open pages from the clinic-website folder in your browser.
 
 ## Notes
 
-- Keep Supabase keys in js/supabaseClient.js for this template setup.
+- Keep only public Supabase client config in js/config.js.
+- js/config.js is ignored by git; js/config.example.js is the committed template.
 - Optimize and replace stock images in assets/images for client delivery.
 - If needed, add branding colors and logo to match clinic identity.

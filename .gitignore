@@ -1,0 +1,12 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Local environment files
+.env
+.env.*
+!.env.example
+
+# Optional local runtime overrides for browser config
+js/config.js
+js/local-config.js
