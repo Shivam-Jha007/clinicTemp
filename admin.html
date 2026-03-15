@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Admin panel to review clinic appointment requests." />
+  <title>BlueWave Clinic | Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body data-page="admin.html">
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a href="index.html" class="logo">BlueWave Clinic</a>
+      <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">Menu</button>
+      <nav class="main-nav" id="mainNav">
+        <a href="index.html">Home</a>
+        <a href="services.html">Services</a>
+        <a href="book.html">Book</a>
+        <a href="contact.html">Contact</a>
+        <a href="admin.html">Admin</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="section page-header">
+    <div class="container">
+      <section id="adminGate" class="admin-gate-card">
+        <h1>Appointments Dashboard</h1>
+        <p>Enter the admin password to unlock appointment records.</p>
+        <form id="adminLoginForm" class="admin-login-form" novalidate>
+          <label>
+            Admin Password
+            <input type="password" id="adminPassword" name="adminPassword" placeholder="Enter password" required />    "clinic123" 
+          </label>                                                                                                               
+          <button type="submit" class="btn btn-primary">Open Dashboard</button>
+        </form>
+        <p id="adminGateMessage" class="status-message" role="status" aria-live="polite"></p>
+      </section>
+
+      <section id="adminDashboard" class="admin-dashboard" hidden>
+        <div class="section-head">
+          <div>
+            <h1>Appointments Dashboard</h1>
+            <p>Review incoming appointment requests from website visitors.</p>
+          </div>
+          <button id="todayFilterBtn" class="btn btn-secondary" type="button">Show Today Only</button>
+        </div>
+
+        <div class="table-wrap">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Reason</th>
+                <th>Created Time</th>
+              </tr>
+            </thead>
+            <tbody id="appointmentsBody"></tbody>
+          </table>
+        </div>
+        <p id="adminMessage" class="status-message" role="status" aria-live="polite"></p>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <h3>BlueWave Clinic</h3>
+        <p>Internal appointment dashboard</p>
+      </div>
+      <div>
+        <h4>Admin Tools</h4>
+        <p>Supabase appointments view</p>
+      </div>
+    </div>
+    <p class="copyright">&copy; <span id="currentYear"></span> BlueWave Clinic. All rights reserved.</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script type="module" src="js/main.js"></script>
+  <script type="module" src="js/admin.js"></script>
+</body>
+</html>
