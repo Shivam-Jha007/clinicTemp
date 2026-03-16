@@ -1,5 +1,7 @@
 # Clinic Appointment Website Template
 
+link: https://clinic-temp-xi.vercel.app
+
 A modern, responsive, lightweight clinic website template for freelance client demos.
 
 This project is built with plain HTML, CSS, and vanilla JavaScript, with Supabase used for appointment storage and admin data viewing.
