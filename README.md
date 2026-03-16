@@ -17,7 +17,7 @@ This project is built with plain HTML, CSS, and vanilla JavaScript, with Supabas
 
 - Frontend: HTML, CSS, Vanilla JavaScript
 - Backend and Database: Supabase
-- Deployment: Netlify or Vercel
+- Deployment: Vercel
 - External integration: Google Maps Embed
 
 ## Folder Structure
@@ -74,11 +74,29 @@ clinic-website/
 1. Create a Supabase project.
 2. Open the SQL Editor in Supabase.
 3. Run the SQL from supabase-schema.sql.
-4. Copy js/config.example.js to js/config.js.
-5. Open js/config.js and update:
+4. For local development only, copy js/config.example.js to js/config.js.
+5. In js/config.js, update:
    - SUPABASE_URL
    - SUPABASE_ANON_KEY
 6. Confirm the appointments table exists in your database.
+
+## Environment Variables (Option B)
+
+Use this for deployment with GitHub where js/config.js is ignored.
+
+Required variables:
+- SUPABASE_URL
+- SUPABASE_ANON_KEY
+
+How it works:
+- The frontend loads runtime config from a serverless endpoint.
+- Vercel endpoint: /api/public-config
+- The loader is in js/config-loader.js.
+
+Vercel setup:
+1. Project Settings -> Environment Variables.
+2. Add SUPABASE_URL and SUPABASE_ANON_KEY.
+3. Redeploy.
 
 ## Security Before Deploy
 
@@ -127,13 +145,6 @@ npx serve .
 Then open pages from the clinic-website folder in your browser.
 
 ## Deployment
-
-### Netlify
-
-1. Create a new site from your project.
-2. Set publish directory to clinic-website.
-3. Deploy.
-
 ### Vercel
 
 1. Import your repository.
@@ -144,5 +155,6 @@ Then open pages from the clinic-website folder in your browser.
 
 - Keep only public Supabase client config in js/config.js.
 - js/config.js is ignored by git; js/config.example.js is the committed template.
+- Serverless config endpoint is in api/public-config.js.
 - Optimize and replace stock images in assets/images for client delivery.
 - If needed, add branding colors and logo to match clinic identity.

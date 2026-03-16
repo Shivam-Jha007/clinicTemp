@@ -15,6 +15,12 @@ const filterBtn = document.getElementById("todayFilterBtn");
 let allAppointments = [];
 let showTodayOnly = false;
 
+async function ensureConfigReady() {
+  if (window.__APP_CONFIG_READY__ && typeof window.__APP_CONFIG_READY__.then === "function") {
+    await window.__APP_CONFIG_READY__;
+  }
+}
+
 function escapeHtml(value) {
   return String(value)
     .replace(/&/g, "&amp;")
@@ -151,9 +157,15 @@ if (loginForm) {
   loginForm.addEventListener("submit", handleLogin);
 }
 
-if (isAuthenticated()) {
-  showDashboard();
-  loadAppointments();
-} else {
-  setGateMessage("Enter the admin password to continue.");
+async function initAdminPage() {
+  await ensureConfigReady();
+
+  if (isAuthenticated()) {
+    showDashboard();
+    loadAppointments();
+  } else {
+    setGateMessage("Enter the admin password to continue.");
+  }
 }
+
+initAdminPage();

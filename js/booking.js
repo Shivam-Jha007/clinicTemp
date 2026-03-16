@@ -4,6 +4,12 @@ const form = document.getElementById("bookingForm");
 const messageBox = document.getElementById("bookingMessage");
 const submitBtn = document.getElementById("submitBtn");
 
+async function ensureConfigReady() {
+  if (window.__APP_CONFIG_READY__ && typeof window.__APP_CONFIG_READY__.then === "function") {
+    await window.__APP_CONFIG_READY__;
+  }
+}
+
 function setMessage(text, statusClass = "") {
   if (!messageBox) {
     return;
@@ -101,6 +107,7 @@ async function handleSubmit(event) {
   setMessage("Submitting your appointment...", "");
 
   try {
+    await ensureConfigReady();
     await createAppointment(appointmentData);
     form.reset();
     setMessage("Appointment request submitted successfully. We will contact you soon.", "status-success");

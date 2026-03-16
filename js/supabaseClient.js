@@ -1,8 +1,12 @@
-const APP_CONFIG = window.__APP_CONFIG || {};
-const SUPABASE_URL = APP_CONFIG.SUPABASE_URL || window.__SUPABASE_URL || "https://YOUR_PROJECT_ID.supabase.co";
-const SUPABASE_ANON_KEY = APP_CONFIG.SUPABASE_ANON_KEY || window.__SUPABASE_ANON_KEY || "YOUR_SUPABASE_ANON_KEY";
-
 let client;
+
+function getRuntimeConfig() {
+  const appConfig = window.__APP_CONFIG || {};
+  return {
+    supabaseUrl: appConfig.SUPABASE_URL || window.__SUPABASE_URL || "https://YOUR_PROJECT_ID.supabase.co",
+    supabaseAnonKey: appConfig.SUPABASE_ANON_KEY || window.__SUPABASE_ANON_KEY || "YOUR_SUPABASE_ANON_KEY"
+  };
+}
 
 function getSupabaseClient() {
   if (client) {
@@ -13,11 +17,13 @@ function getSupabaseClient() {
     throw new Error("Supabase library is not loaded.");
   }
 
-  if (SUPABASE_URL.includes("YOUR_PROJECT_ID") || SUPABASE_ANON_KEY.includes("YOUR_SUPABASE_ANON_KEY")) {
+  const { supabaseUrl, supabaseAnonKey } = getRuntimeConfig();
+
+  if (supabaseUrl.includes("YOUR_PROJECT_ID") || supabaseAnonKey.includes("YOUR_SUPABASE_ANON_KEY")) {
     throw new Error("Set SUPABASE_URL and SUPABASE_ANON_KEY in js/config.js (copy from js/config.example.js).");
   }
 
-  client = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  client = window.supabase.createClient(supabaseUrl, supabaseAnonKey);
   return client;
 }
 
